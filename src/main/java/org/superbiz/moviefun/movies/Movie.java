@@ -38,7 +38,6 @@ public class Movie implements Serializable {
     private int year;
     private String genre;
     private int rating;
-
     public Movie() {
     }
 
@@ -50,11 +49,11 @@ public class Movie implements Serializable {
         this.rating = rating;
     }
 
-    public Movie(String director, String title, int year) {
+    /*public Movie(String director, String title, int year) {
         this.director = director;
         this.title = title;
         this.year = year;
-    }
+    }*/
 
     public long getId() {
         return id;
