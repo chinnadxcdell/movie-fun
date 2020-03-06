@@ -25,6 +25,7 @@ public class AlbumConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean albumsLocalContainerEntityManagerFactoryBean(DataSource albumsDataSource, HibernateJpaVendorAdapter hibernateJpaVendorAdapter) {
+        System.out.println("----------------------");
         LocalContainerEntityManagerFactoryBean albumsLocalContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         albumsLocalContainerEntityManagerFactoryBean.setDataSource(albumsDataSource);
         albumsLocalContainerEntityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter);
