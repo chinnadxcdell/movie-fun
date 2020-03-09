@@ -1,6 +1,8 @@
 package org.superbiz.moviefun.albums;
 
 import org.apache.tika.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -26,7 +28,10 @@ public class AlbumsController {
     private final AlbumsBean albumsBean;
     private final BlobStore blobStore;
 
-    public AlbumsController(AlbumsBean albumsBean, BlobStore blobStore) {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    public AlbumsController(AlbumsBean albumsBean, BlobStmoviefun-shiny-gnu-jp.cfapps.io
+ore blobStore) {
         this.albumsBean = albumsBean;
         this.blobStore = blobStore;
     }
@@ -46,14 +51,14 @@ public class AlbumsController {
 
     @PostMapping("/{albumId}/cover")
     public String uploadCover(@PathVariable Long albumId, @RequestParam("file") MultipartFile uploadedFile) {
-        System.out.println("Uploading cover for album with id " + albumId);
-
+        logger.debug("Uploading cover for album with id " + albumId);
+        logger.info("Uploading cover for album with id " + albumId);
         if (uploadedFile.getSize() > 0) {
             try {
                 tryToUploadCover(albumId, uploadedFile);
 
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("There was an error while uploading album cover", e);
             }
         }
 
@@ -64,7 +69,7 @@ public class AlbumsController {
     public HttpEntity<byte[]> getCover(@PathVariable long albumId) throws IOException, URISyntaxException {
         Optional<Blob> maybeCoverBlob = blobStore.get(getCoverBlobName(albumId));
         Blob coverBlob = maybeCoverBlob.orElseGet(this::buildDefaultCoverBlob);
-
+    logger.debug("helo debug log in getcover method");
         byte[] imageBytes = IOUtils.toByteArray(coverBlob.inputStream);
 
         HttpHeaders headers = new HttpHeaders();
