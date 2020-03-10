@@ -47,6 +47,9 @@ public class AlbumsUpdater {
             return;
         }
 
+
+
+
         List<Album> albumsToHave = readFromCsv(objectReader, maybeBlob.get().inputStream);
         List<Album> albumsWeHave = albumsBean.getAlbums();
 
@@ -86,4 +89,6 @@ public class AlbumsUpdater {
         maybeExisting.ifPresent(existing -> album.setId(existing.getId()));
         return album;
     }
+
+
 }
